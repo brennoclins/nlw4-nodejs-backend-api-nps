@@ -49,4 +49,25 @@ Aluno: Brenno
 - [x] Enviar e-mail
 - [x] Código da aula-04: "#neverstoplearning"
 
-### 
+### aula-05
+
+- [x] Refatorando o SendMailController
+- [x] Criar controller de resposta de usuário
+- [x] Validar se usuário existe
+- [x] Alterar a nota da resposta
+- [x] Criar controle de calculo de NPS
+- [x] Criar validações
+- [x] Criar classe de Erros
+- [x] Código da aula-05: "#missioncomplete"
+
+```txt
+Calculo NPS
+
+notas: 1 2 3 4 5  6 7 8 9 10
+
+detratores = 0 1 2 3 4 5 6
+passivos = 7 8
+Promotores = 9 10
+
+( (totalPromotores - totalDetratores) / (totalRespondentes) ) x 100
+```

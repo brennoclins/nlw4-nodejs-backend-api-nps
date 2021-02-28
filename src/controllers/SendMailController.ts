@@ -5,6 +5,7 @@ import { SurveysUsersRepository } from "../repositories/SurveysUsersRepository";
 import { UsersRepository } from "../repositories/UsersRepository";
 import SendMailService from "../services/SendMailService";
 import { resolve } from 'path';
+import { AppError } from "../errors/AppError";
 
 class SendMailController {
 
@@ -18,24 +19,17 @@ class SendMailController {
     const user = await usersRepository.findOne({ email })
 
     if (!user) {
-      return response.status(400).json({
-        error: "User does not exists"
-      });
+      throw new AppError("User does not exists");
     };
 
     const survey = await surveysRepository.findOne({ id: survey_id });
 
     if (!survey) {
-      return response.status(400).json({
-        error: "survey does not exists"
-      });
+      throw new AppError("Survey does not exists");
     };
 
-    const surveyUserAlreadyExists = await surveysUsersRepository.findOne({
-      where:[
-        {user_id: user.id},
-        {value: null}
-      ],
+    let surveyUserAlreadyExists = await surveysUsersRepository.findOne({
+      where: {user_id: user.id, value: null},
       relations: ["user", "survey"],
     })
 
@@ -46,6 +40,7 @@ class SendMailController {
         survey_id 
       })
       await surveysUsersRepository.save(surveyUser);
+      surveyUserAlreadyExists = surveyUser;
     }
   
     // enviando emails
@@ -54,7 +49,7 @@ class SendMailController {
       name: user.name,
       title: survey.title,
       description: survey.description,
-      user_id: user.id,
+      id: surveyUserAlreadyExists.id,
       link: process.env.URL_MAIL,
     }
 
