@@ -38,3 +38,15 @@ Aluno: Brenno
 - [x] O que são testes automatizados?
 - [x] Criar o primeiro teste
 - [x] Código do desafio aula-03: #focopraticagrupo
+
+### aula-04
+
+- [x] Criar migration de surveysUsers
+- [x] Criar model
+- [x] Criar repositorio
+- [x] Criar controller
+- [x] Criar serviço de e-mail
+- [x] Enviar e-mail
+- [x] Código da aula-04: "#neverstoplearning"
+
+### 
